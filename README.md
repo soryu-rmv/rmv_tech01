@@ -1,5 +1,5 @@
-# 3プラグイン併用によるRPGイベントにおけるキャラクターイベント配置・管理の効率化
-(Efficient design for events in RPG story by using three js plugins)
+# 4プラグイン併用によるRPGイベントにおけるキャラクターイベント配置・管理の効率化
+(Efficient design for events in RPG story by using four js plugins)
 
 1. はじめに
 RPGツクールシリーズでは、ゲームマップ上に現れる様々な処理(キャラクターの配置・移動、開閉する扉などの物体、見えない内部的な処理)を「イベント」として扱う。  
@@ -34,7 +34,15 @@ RPGツクールMVは、プロジェクト内のデータを次々とメモリ上
 専ら、長編のRPGの制作となると作業中のツクールのクラッシュとの戦いとなる。
 
 
-そこで、
+これらのツクールMVによるRPG制作の面倒さや障害を乗り越えるために、  
+以下の4つのプラグインを併用した、RPGのキャラクター登場を伴うイベントの配置を効率化を提案する。  
+
+- EventReSpawn.js
+- TemplateEvent.js
+- Manosasayaki_CharacterBind.js
+- varIDforPlugin.js
+
+
 
 
 

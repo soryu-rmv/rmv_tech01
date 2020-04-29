@@ -139,6 +139,21 @@ Manosasayaki_CharacterBind.js を使って、生成したイベントを対象�
 したがって、直後に来る「このイベント、下を向く」の命令は、「1番のキャラクターを下に向かせる」ことに置き換わる。  
 
 
+![Fig7](https://user-images.githubusercontent.com/64351233/80568648-62defc00-8a32-11ea-828b-72a8397a32c3.png)
+
+CharacterBind の効果は、移動ルートの設定、フキダシアイコンの表示といった  
+ツクール上で対象を指定して用いるイベントコマンドの対象に影響する（文章の表示には影響しない）。  
+移動ルートの設定における対象指定はどうでもよく、CharacterBind_varID[1] 2 のように  
+コマンドの直前に対象のIDを指定したプラグインコマンドを挿入することで、対象指定の代わりとなる。 
+CharacterBindは指定IDを書き換えない限り、効果は持続する。ゆえに、ストーリーイベントの挙動の記述は上図に示す形となる。
+
+
+
+![Fig6](https://user-images.githubusercontent.com/64351233/80568399-ddf3e280-8a31-11ea-8ca8-b68ab82d4d4e.png)
+
+これにより、上図の赤丸の領域にプレイヤーが辿り着いたとき、キャラクターを当該位置に置いてストーリーを進行させる  
+という処理をツクール上では大きく簡略化することに成功した。
+
 
 
 #### 動的生成したキャラクターイベントの削除
@@ -157,7 +172,7 @@ $gameMap.eraseEvent($gameVariables.value(3))
 もちろん、数が増えた場合は
 
 for(var i=1; i<=3; i++){  
- $gameMap.eraseEvent($gameVariables.value(i))   
+　$gameMap.eraseEvent($gameVariables.value(i))   
 }  
 
 としてもよい。  

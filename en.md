@@ -151,9 +151,9 @@ After installation of this plugin, we can use following suffix of every plugin c
 **_varID[X]**
 
 With this suffix, **X-th argument of the plugin command is replaced to the variable in RPGMV whose ID is the value of X-th argument** .  
-Being every event ID which is generated dinamically known, we can write down commands such as     
+Being every event ID which is generated dinamically known, we can write down commands as below.   
 
-**CharacterBind_varID[1] 1**  .
+**CharacterBind_varID[1] 1**  
 
 This command stands for a command **targetting an event represented by variable 1**.
 Therefore, when we insert a event command "Turn Down" in Set Movement Route after this command,
@@ -198,18 +198,18 @@ $gameMap.eraseEvent($gameVariables.value(1))
 $gameMap.eraseEvent($gameVariables.value(2))  
 $gameMap.eraseEvent($gameVariables.value(3))   
 
-It is exactly convenient for large number of events to write 
+It is exactly convenient for large number of events to write as below.
 
 for(var i=1; i<=3; i++){  
 　$gameMap.eraseEvent($gameVariables.value(i))   
-}  .
+}  
 
 
 
 Moreover, target fix by Manosasayaki_CharacterBind.js is valid unless we specify to stop.  
-With delete the generated events, call a plugin command like    
+With delete the generated events, call a plugin command like below.
 
-**CharacterBind**  .
+**CharacterBind**  
 
 If you forget that, every event behavior on game scene becomes crazy.
 

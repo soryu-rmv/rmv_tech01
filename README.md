@@ -86,12 +86,16 @@ varIDforPlugin.js
 キャラクターに限らないが、頻繁にマップに登場させるイベントを登録する。
 これは、EventReSpawn.js や TemplateEvent.js を使っているだけである。
 
-
+![Fig3](https://user-images.githubusercontent.com/64351233/80565614-e1846b00-8a2b-11ea-9d61-0063ed06cea9.png)
 
 ### ストーリーイベントの作成
 上記の準備の上で、実際にRPGとしてのイベントを作成する。
 
 
+![Fig4](https://user-images.githubusercontent.com/64351233/80565698-198bae00-8a2c-11ea-90f8-2275e985d8d3.png)
+
+
+![Fig5](https://user-images.githubusercontent.com/64351233/80565699-1abcdb00-8a2c-11ea-98b7-5a0d0c4ed41c.png)
 
 
 

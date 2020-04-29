@@ -84,15 +84,19 @@ varIDforPlugin.js
 
 ### キャラクターイベント準備
 キャラクターに限らないが、頻繁にマップに登場させるイベントを登録する。
-これは、EventReSpawn.js や TemplateEvent.js を使っているだけである。
+これは、EventReSpawn.js や TemplateEvent.js を使っているだけで、ツクール上での作業はプラグイン導入時の説明に従ったままである。
 
 ![Fig3](https://user-images.githubusercontent.com/64351233/80565614-e1846b00-8a2b-11ea-9d61-0063ed06cea9.png)
 
 ### ストーリーイベントの作成
 上記の準備の上で、実際にRPGとしてのイベントを作成する。
-
+イベントの開始条件の管理からキャラクターの配置や会話処理、イベントの終了までを全て１つのイベントで行う。
+例えば、下図Fig.4のように、1ページ目ではイベントを起こしたい場所に  
+「並列処理」で開始条件（プレイヤーがある場所に立った等）を満たすかどうかを監視する。
 
 ![Fig4](https://user-images.githubusercontent.com/64351233/80565698-198bae00-8a2c-11ea-90f8-2275e985d8d3.png)
+
+
 
 
 ![Fig5](https://user-images.githubusercontent.com/64351233/80565699-1abcdb00-8a2c-11ea-98b7-5a0d0c4ed41c.png)

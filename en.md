@@ -136,100 +136,110 @@ However, there remains significant problems in terms of **"direction of RPG even
 
 #### Targetting on generated events for moving event commands
 
-RPGの演出という点での問題というのは、  
-ツクールのエディタ側からキャラクターを動かしたり、ふきだしアイコンを表示したりする場合に、
-**動的生成したキャラクターを指定できない**ということである。  
-（ツクール上ではイベントを作っていないことになっているので、**そもそも指定したいキャラクターが存在していない**）  
+The problem relies on direction of RPG event scenes is that  
+we **cannot specify dyanamically generated events ID** to make actions and speech baloons above them by using RPGMV.
+As a matter of course, events do not exist on RPGMV editor because they are generated during the game.
 
-  
-そこで、指定したキャラクターに対してイベントコマンドの処理の対象を固定する  
-Manosasayaki_CharacterBind.js を使って、生成したイベントを対象として命令を実行させたい。  
-しかし、**このプラグインコマンドで指定するイベントIDも定数でなければならない**ので直接は使えない。  
 
-ここで満を持して、 varIDforPlugin.js の出番となる。このプラグインを導入することによって、  
-他の導入済みプラグインのコマンドの後ろに
+We then specify target event ID by using a plugin command presented by Manosasayaki_CharacterBind.js.  
+But, unfortunately, event ID to be specified by this command also **must be constant ID** .  
+
+
+Here it is a turn of varIDforPlugin.js eventually.  
+After installation of this plugin, we can use following suffix of every plugin command.
 
 **_varID[X]**
 
-とつけると、X番目の引数を **「引数で指定した番号のツクールの変数の値」** に変更することができる。  
-つまり、今の作業の場合は指定したい動的生成したキャラクターイベントのIDは分かっているので、  
-これを用いれば、  
+With this suffix, **X-th argument of the plugin command is replaced to the variable in RPGMV whose ID is the value of X-th argument** .  
+Being every event ID which is generated dinamically known, we can write down commands such as     
 
-**CharacterBind_varID[1] 1**
+**CharacterBind_varID[1] 1**  .
 
-のように書けて、これは  
-**「1番目の引数の値を番号する変数に格納されたIDのイベント」をコマンド処理の対象とする**　　とできる。  
-したがって、直後に来る「このイベント、下を向く」の命令は、「1番のキャラクターを下に向かせる」ことに置き換わる。  
+This command stands for a command **targetting an event represented by variable 1**.
+Therefore, when we insert a event command "Turn Down" in Set Movement Route after this command,
+the command replaced to the 1st character will turn below (even if the target is specified in Set Movement Route command).
+
 
 
 ![Fig7](https://user-images.githubusercontent.com/64351233/80568648-62defc00-8a32-11ea-828b-72a8397a32c3.png)
 
-CharacterBind の効果は、移動ルートの設定、フキダシアイコンの表示といった  
-ツクール上で対象を指定して用いるイベントコマンドの対象に影響する（文章の表示には影響しない）。  
-移動ルートの設定における対象指定はどうでもよく、CharacterBind_varID[1] 2 のように  
-コマンドの直前に対象のIDを指定したプラグインコマンドを挿入することで、対象指定の代わりとなる。 
-CharacterBindは指定IDを書き換えない限り、効果は持続する。ゆえに、ストーリーイベントの挙動の記述は上図に示す形となる。
+The CharacterBind command affects only event commands to specify target in RPGMV such as   
+Set Movement Route command, Show Ballon icon, Show animation.
+(Show text is not affected by this.)  
+
+
+Before such commands require the target, put the command like  
+CharacterBind_varID[1] 2 , then it is a specification of target event.  
+Unless overwriting ID, The effect of CharacterBind is kept.  
+The above figure shows an example of an event scene design for RPG in this technique.   
 
 
 
 ![Fig6](https://user-images.githubusercontent.com/64351233/80568399-ddf3e280-8a31-11ea-8ca8-b68ab82d4d4e.png)
 
-これにより、上図の赤丸の領域にプレイヤーが辿り着いたとき、キャラクターを当該位置に置いてストーリーを進行させる  
-という処理をツクール上では大きく簡略化することに成功した。
+Finally, I succeeded to optimize the process that when the player reaches a specific point on a map,   
+triger an event with dynamic arrangement of character sprites.   
+(In an example in above figure, when a player stands at a region encircled by red color,  
+the story telling starts after the character sprites are arranged.   
+But number of events which control the scene is just only one!)   
+
 
 
 
 #### Delete events
 
-イベント終了する際には、動的生成したキャラクターを削除しなければならない。  
-さもなければ、イベントが終わったにも関わらずキャラクターがその場に残り続けてしまうバグとなる。
+Before terminating scene event, we must delete the dynamically generated events for character sprites,  
+or character sprites will still remain after the event, which seemes to be pity.
 
-これは、イベントコマンドのスクリプトから
+
+By using script in RPGMV command, we can delete events as follows.
 
 $gameMap.eraseEvent($gameVariables.value(1))  
 $gameMap.eraseEvent($gameVariables.value(2))  
 $gameMap.eraseEvent($gameVariables.value(3))   
 
-のように書けば、1番、2番、3番目のキャラクターに対して「イベントの一時消去」を適用し、生成したイベントを削除できる。
-
-もちろん、数が増えた場合は
+It is exactly convenient for large number of events to write 
 
 for(var i=1; i<=3; i++){  
 　$gameMap.eraseEvent($gameVariables.value(i))   
-}  
-
-としてもよい。  
+}  .
 
 
-また、Manosasayaki_CharacterBind.js によるコマンド対象イベントの固定化は、何もしなければ永続してしまうため  
-イベントが終了するタイミングで上記の処理に併せて
 
-CharacterBind
+Moreover, target fix by Manosasayaki_CharacterBind.js is valid unless we specify to stop.  
+With delete the generated events, call a plugin command like    
 
-とプラグインコマンド実行して、固定化を解除することを忘れてはならない。
+**CharacterBind**  .
 
-これらの処理は、イベント終了時の「画面のフェードアウト」を行った後に行うとゲーム演出としての自然さが出る。
+If you forget that, every event behavior on game scene becomes crazy.
+
+
+
 
 
 ## 4. Assosiation with other plugins
-動的なキャラクターイベント配置において、RPGの演出としての機能強化という点で  
-他のプラグインとの共用例も紹介する。
+
+I introduce additional assosiation with other plugins which are avaiable for free   
+to strengthen direction of RPG event scenes.
+
 
 ### YEP_MessageCore.js
-TemplateEvent.jsにより、生成したイベントのIDを変数に格納しているため、  
-YEP_MessageCoreと組み合わせた吹き出しメッセージウィンドウも簡略化が可能である。
+Since we have every event ID in variables by TemplateEvent.js,   
+we obtain easy management of the ballon message window provided by YEP_MessageCore. 
+For the ballon message window With YEP_MessageCore, we have to specify event ID to show message window
+above specific characters. The event ID for character is generally different in each map,   
+which leads to making a bug due to mismanagement of event.   
+(ID is assigned in the order of event generation in the map.)    
 
-マップごとにキャラクターに割り当てられたイベントID（定数）を指定すると、  
-マップごとにIDが変わってしまうため、ゲームの規模が大きくなると設定ミスの発生は避けられない。
-しかしこの手法によれば、「文章の表示」において1番目のキャラクターのIDは常に **\v[1]** で参照できるため  
-会話コマンドのコピーによる再利用の利便性も向上する。
-
+However, with this technique, we can the event ID for 1st character by specifing **\v[1]**.
+This is much easier as usual. (We can recycle by copy & paste from message commands in other events.)    
 
 ### SRD_CameraCore.js
-マップ上でのカメラ機能に関するプラグインは様々なものが公開されているが、
-図で例示したプロジェクトでは、SRD_CameraCore.js および関連プラグインを使用している。  
 
-FocusCamera_varID[2] event 1 1
+There are several plugins for the treatment of camera view on the map.   
+The project shown as an example uses SRD_CameraCore.js and its supportive plugins.   
 
-は、2番目の引数（つまり、最初の1）のIDの変数を持つイベントに即座にカメラを合わせる、というプラグインコマンドだが
-これも　varIDforPlugin.js との併用で実現している。
+FocusCamera_varID[2] event 1 1   
+
+Above plugin command works to focus the camera to the event whose ID is the value of variable 1.   
+This is realized by co-working with varIDforPlugin.js.  

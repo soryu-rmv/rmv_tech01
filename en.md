@@ -247,7 +247,7 @@ This is realized by co-working with varIDforPlugin.js.
 
 
 
-** Appendix
+## Appendix
 
 After this article is released, **Manosasayaki_CharacterBind.js is updated**    
 **to assign an argument with a variable ID** (in May 2nd, 2020). By this update, we are able to   

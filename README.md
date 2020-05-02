@@ -82,10 +82,10 @@ RPGツクールシリーズでは、ゲームマップ上に現れる様々な�
 本実装では、4つのプラグインは以下の順で登録している。  
 著名なYEP系やMOG系など120種類以上のプラグインを同時に使用しているが競合等の障害は確認されていない。
 
-Manosasayaki_CharacterBind.js  
-EventReSpawn.js  
-TemplateEvent.js  
-varIDforPlugin.js  
+Manosasayaki_CharacterBind.js  [LINK](https://plugin.fungamemake.com/archives/26451)     
+EventReSpawn.js  [LINK](https://triacontane.blogspot.com/2016/08/blog-post.html)    
+TemplateEvent.js  [LINK](https://triacontane.blogspot.com/2016/06/blog-post_25.html)    
+varIDforPlugin.js  [LINK](https://fermiumbay13.hatenablog.com/entry/2017/12/03/102529)    
 
 
 ### キャラクターイベント準備
@@ -216,3 +216,16 @@ FocusCamera_varID[2] event 1 1
 
 は、2番目の引数（つまり、最初の1）のIDの変数を持つイベントに即座にカメラを合わせる、というプラグインコマンドだが
 これも　varIDforPlugin.js との併用で実現している。
+
+
+
+## 追記
+
+本記事の投稿以降(2020/05/02)、Manosasayaki_CharacterBind.js に**変数指定が可能なオプションが実装された**。       
+これにより本記事の提案については３プラグインで実現可能となったが、引数に変数を指定するオプションは  
+一般のプラグインにはあまり実装されていない。  
+
+４章で示した他のプラグインとの共用までを考慮するという点では、varIDforPlugin.js との併用はまだ有用であると考えられる。
+
+
+

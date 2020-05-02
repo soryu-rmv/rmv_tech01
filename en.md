@@ -239,7 +239,7 @@ This is much easier as usual. (We can recycle by copy & paste from message comma
 There are several plugins for the treatment of camera view on the map.   
 The project shown as an example uses SRD_CameraCore.js and its supportive plugins.   
 
-FocusCamera_varID[2] event 1 1   
+**FocusCamera_varID[2] event 1 1**   
 
 Above plugin command works to focus the camera to the event whose ID is the value of variable 1.   
 This is realized by co-working with varIDforPlugin.js.  

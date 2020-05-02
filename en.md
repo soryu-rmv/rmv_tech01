@@ -90,10 +90,10 @@ Though I have been using more than 120 scripts including development by Yanfly a
 I confirm no troubles due to conflict of plugin implementation.
 
 
-Manosasayaki_CharacterBind.js  
-EventReSpawn.js  
-TemplateEvent.js  
-varIDforPlugin.js  
+Manosasayaki_CharacterBind.js  [LINK](https://plugin.fungamemake.com/archives/26451)    
+EventReSpawn.js  [LINK](https://triacontane.blogspot.com/2016/08/blog-post.html)    
+TemplateEvent.js  [LINK](https://triacontane.blogspot.com/2016/06/blog-post_25.html)    
+varIDforPlugin.js  [LINK](https://fermiumbay13.hatenablog.com/entry/2017/12/03/102529)    
 
 
 ### Preparation for characters
@@ -243,3 +243,15 @@ FocusCamera_varID[2] event 1 1
 
 Above plugin command works to focus the camera to the event whose ID is the value of variable 1.   
 This is realized by co-working with varIDforPlugin.js.  
+
+
+
+
+** Appendix
+
+After this article is released, **Manosasayaki_CharacterBind.js is updated**    
+**to assign an argument with a variable ID** (in May 2nd, 2020). By this update, we are able to   
+implement this technique in this article with three plugins.
+
+Nevertheless, an option to assign arguments with variables are not applied to existing plugins in general.
+In terms of using other plugin combinations as shown in Section 4, varIDforPlugin.js is still effective.

@@ -251,7 +251,7 @@ This is realized by co-working with varIDforPlugin.js.
 
 After this article is released, **Manosasayaki_CharacterBind.js is updated**    
 **so as to assign an argument with a variable ID** (in May 2, 2020). By this update, we are able to   
-implement this technique in this article with three plugins.
+implement this technique presented in this article with just three plugins.
 
 Nevertheless, an option to assign arguments with variables are not applied to existing plugins in general.
 In terms of using other plugin combinations as shown in Section 4, varIDforPlugin.js is still effective.
